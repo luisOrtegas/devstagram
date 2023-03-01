@@ -1,0 +1,13 @@
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:+ZIM5Tvpz7O4Bk5bQo9WlgMVXs0VGQEJMfVJskcAxog=
+APP_DEBUG=true
+APP_URL=http://devstagram.test
+
+
+DB_CONNECTION=mysql
+DB_HOST=containers-us-west-67.railway.app
+DB_PORT=6999
+DB_DATABASE=railway
+DB_USERNAME=root
+DB_PASSWORD=eMIKfFTtUikDIOqsnV7G
