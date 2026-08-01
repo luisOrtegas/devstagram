@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Comentario;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -79,6 +80,33 @@ class DemoDataSeeder extends Seeder
                 $nextUser->id,
                 $secondUser->id,
             ]);
+        }
+
+        $comments = [
+            '¡Excelente publicación! Gracias por compartirla.',
+            'Me gustó mucho esta idea, sigue así.',
+            'El resultado quedó increíble.',
+            'Muy buen trabajo, espero ver más publicaciones.',
+            'Interesante proyecto, gracias por mostrar el proceso.',
+        ];
+
+        $postsByUser = Post::whereIn('user_id', $users->pluck('id'))
+            ->orderBy('id')
+            ->get()
+            ->groupBy('user_id');
+
+        foreach ($users as $userIndex => $user) {
+            foreach ($comments as $commentIndex => $comment) {
+                $targetUser = $users[($userIndex + $commentIndex + 1) % $users->count()];
+                $targetPosts = $postsByUser->get($targetUser->id);
+                $post = $targetPosts[$commentIndex % $targetPosts->count()];
+
+                Comentario::updateOrCreate([
+                    'user_id' => $user->id,
+                    'post_id' => $post->id,
+                    'comentario' => $comment,
+                ]);
+            }
         }
     }
 }
