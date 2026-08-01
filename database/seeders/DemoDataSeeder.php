@@ -6,6 +6,7 @@ use App\Models\Comentario;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 
 class DemoDataSeeder extends Seeder
@@ -20,6 +21,11 @@ class DemoDataSeeder extends Seeder
             ['name' => 'Sofía Ramírez', 'username' => 'sofia.design', 'email' => 'sofia@devstagram.local'],
             ['name' => 'Miguel Hernández', 'username' => 'miguel.foto', 'email' => 'miguel@devstagram.local'],
             ['name' => 'Laura Castillo', 'username' => 'laura.code', 'email' => 'laura@devstagram.local'],
+            ['name' => 'Diego Navarro', 'username' => 'diego.web', 'email' => 'diego@devstagram.local'],
+            ['name' => 'Valeria Cruz', 'username' => 'valeria.art', 'email' => 'valeria@devstagram.local'],
+            ['name' => 'Fernando Ruiz', 'username' => 'fernando.dev', 'email' => 'fernando@devstagram.local'],
+            ['name' => 'Camila Vargas', 'username' => 'camila.media', 'email' => 'camila@devstagram.local'],
+            ['name' => 'Ricardo Flores', 'username' => 'ricardo.tech', 'email' => 'ricardo@devstagram.local'],
         ];
 
         $users = collect($profiles)->map(function ($profile) use ($password) {
@@ -55,7 +61,7 @@ class DemoDataSeeder extends Seeder
             'Resultados de esta semana',
         ];
 
-        foreach ($users as $userIndex => $user) {
+        foreach ($users->take(5) as $userIndex => $user) {
             for ($postIndex = 0; $postIndex < 2; $postIndex++) {
                 $index = ($userIndex * 2) + $postIndex;
 
@@ -70,6 +76,29 @@ class DemoDataSeeder extends Seeder
                     ]
                 );
             }
+        }
+
+        $availableImages = collect(File::files(public_path('uploads')))
+            ->filter(function ($file) {
+                return in_array(strtolower($file->getExtension()), ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+            })
+            ->sortBy(function ($file) {
+                return $file->getFilename();
+            })
+            ->values();
+
+        foreach ($availableImages as $imageIndex => $file) {
+            $user = $users[$imageIndex % $users->count()];
+            $filename = $file->getFilename();
+
+            Post::firstOrCreate(
+                ['imagen' => $filename],
+                [
+                    'user_id' => $user->id,
+                    'titulo' => 'Galería Devstagram ' . ($imageIndex + 1),
+                    'descripcion' => 'Imagen disponible en la galería local de Devstagram.',
+                ]
+            );
         }
 
         foreach ($users as $index => $user) {
