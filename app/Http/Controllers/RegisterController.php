@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeUser;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -49,6 +51,9 @@ class RegisterController extends Controller
 
         //Otra forma de autenticar al usuario
         auth()->login($user);
+
+        //Enviar correo de bienvenida mediante el servicio configurado (Mailtrap en local)
+        Mail::to($user->email)->send(new WelcomeUser($user));
 
 
         //Redirecionar al usuario
