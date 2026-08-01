@@ -7,6 +7,28 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Ejecutar Devstagram localmente en Windows
+
+Devstagram conserva su arquitectura MVC en Laravel y puede iniciarse sin
+XAMPP, Docker, Railway ni un servidor MySQL. La ejecución local usa SQLite y
+el servidor integrado de PHP.
+
+Requisitos disponibles en `PATH`:
+
+- PHP 8.1 o posterior, con las extensiones SQLite y GD.
+- Composer 2.
+
+Después de descargar o clonar el repositorio, haz doble clic en
+`Iniciar-Devstagram.bat`. En la primera ejecución, el iniciador:
+
+1. prepara las dependencias de Laravel si todavía no existen;
+2. crea un archivo `.env` local y genera una clave nueva;
+3. crea la base de datos SQLite y ejecuta las migraciones;
+4. abre `http://127.0.0.1:8000` en el navegador predeterminado.
+
+Mantén abierta la ventana del iniciador mientras utilizas la aplicación. Para
+detener el servidor, cierra esa ventana o presiona `Ctrl+C`.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
