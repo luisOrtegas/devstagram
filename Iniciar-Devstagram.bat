@@ -27,7 +27,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-php -m | findstr /i /x "pdo_sqlite" >nul 2>&1
+php -r "exit(extension_loaded('pdo_sqlite') ? 0 : 1);"
 if errorlevel 1 (
     echo ERROR: PHP no tiene habilitada la extension pdo_sqlite.
     echo Habilita extension=pdo_sqlite en el archivo php.ini.
