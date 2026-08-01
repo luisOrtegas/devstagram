@@ -32,7 +32,7 @@ class RegisterController extends Controller
         ]);
 
         
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
@@ -48,11 +48,11 @@ class RegisterController extends Controller
 
 
         //Otra forma de autenticar al usuario
-        auth()->attempt($request->only('email', 'password'));    
+        auth()->login($user);
 
 
         //Redirecionar al usuario
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index', $user->username);
     } 
     
 }
