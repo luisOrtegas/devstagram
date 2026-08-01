@@ -5,10 +5,12 @@ Dropzone.autoDiscover = false;
 
 const dropzoneElement = document.querySelector('#dropzone');
 const imageInput = document.querySelector('[name="imagen"]');
+const postForm = document.querySelector('#post-form');
+const imageError = document.querySelector('#image-error');
 
 if (dropzoneElement && imageInput) {
     const dropzone = new Dropzone(dropzoneElement, {
-        dictDefaultMessage: 'Sube aquí tu imagen',
+        dictDefaultMessage: 'Haz clic o arrastra aquí tu imagen',
         acceptedFiles: '.png, .jpg, .jpeg, .gif',
         addRemoveLinks: true,
         dictRemoveFile: 'Borrar archivo',
@@ -33,9 +35,18 @@ if (dropzoneElement && imageInput) {
 
     dropzone.on('success', function(file, response) {
         imageInput.value = response.imagen;
+        imageError?.classList.add('hidden');
     });
 
     dropzone.on('removedfile', function() {
         imageInput.value = '';
+    });
+
+    postForm?.addEventListener('submit', function(event) {
+        if (!imageInput.value.trim()) {
+            event.preventDefault();
+            imageError.textContent = 'Debes subir una imagen antes de crear la publicación.';
+            imageError.classList.remove('hidden');
+        }
     });
 }

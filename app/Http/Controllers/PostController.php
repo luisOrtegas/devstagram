@@ -38,6 +38,8 @@ class PostController extends Controller
             'titulo' => ['required', 'string', 'max:255'],
             'descripcion' => ['nullable', 'string', 'max:2000'],
             'imagen' => ['required', 'string', 'max:255']
+        ], [
+            'imagen.required' => 'Debes subir una imagen antes de crear la publicación.',
         ]);
 
         //  Post::create([
@@ -95,5 +97,3 @@ class PostController extends Controller
 
     }
 }
-
-
