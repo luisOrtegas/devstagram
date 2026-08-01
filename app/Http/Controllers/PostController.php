@@ -35,9 +35,9 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'titulo' => 'required|max:255',
-            'titulo' => 'required',
-            'imagen' => 'required|max:1000'
+            'titulo' => ['required', 'string', 'max:255'],
+            'descripcion' => ['nullable', 'string', 'max:2000'],
+            'imagen' => ['required', 'string', 'max:255']
         ]);
 
         //  Post::create([
@@ -69,6 +69,8 @@ class PostController extends Controller
 
     public function show(User $user, Post $post)
     {
+        abort_unless($post->user_id === $user->id, 404);
+
         return view('posts.show', [
             'post' => $post,
             'user' => $user
@@ -93,6 +95,5 @@ class PostController extends Controller
 
     }
 }
-
 
 

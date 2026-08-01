@@ -12,12 +12,16 @@ class LikePost extends Component
 
     public function mount($post)
     {
-       $this->isLiked = $post->checkLike(auth()->user());
-       $this->likes = $post->likes->count();
+       $this->isLiked = auth()->check() && $post->checkLike(auth()->user());
+       $this->likes = $post->likes()->count();
     } 
 
     public function like() 
     {
+        if (auth()->guest()) {
+            return redirect()->route('login');
+        }
+
         if( $this->post->checkLike(auth()->user() )) {
             $this->post->likes()->where('post_id', $this->post->id)->delete();
             $this->isLiked = false;

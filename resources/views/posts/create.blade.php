@@ -4,10 +4,6 @@
     Crea una nueva Publicacion
 @endsection 
 
-@push('styles')
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-@endpush
-
 @section('contenido')
    <div class="md:flex md:items-center">
       <div class="md:w-1/2 px-10">

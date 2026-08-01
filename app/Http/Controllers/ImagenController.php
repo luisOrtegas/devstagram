@@ -11,6 +11,10 @@ class ImagenController extends Controller
     //
     public function store(Request $request)
     {
+       $request->validate([
+          'file' => ['required', 'image', 'mimes:jpg,jpeg,png,gif', 'max:5120'],
+       ]);
+
        $imagen = $request->file('file');
 
        $nombreImagen = Str::uuid() . "." . $imagen->extension();

@@ -3,13 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        @method('styles')
+        @stack('styles')
         <title>DevStagram - @yield('titulo')</title>
-        <script src="{{ asset('js/app.js') }}" defer></script>
         @livewireStyles
-        @vite(['resources/css/app.css'])
-        @vite(['resources/js/app.js']) 
-        <link rel="icon" href="{{asset('ruta')}}">
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
     </head>
     <body class="bg-gray-100">
         <header class="p-5 border-b bg-white shadow">
@@ -91,4 +89,4 @@
 
     @livewireScripts
  </body>
-</html>       
+</html>
