@@ -46,7 +46,7 @@
                         />
                         <div class="min-w-0">
                             <p class="truncate font-bold text-gray-800">{{ $usuario->name }}</p>
-                            <p class="truncate text-sm text-gray-500">@@{{ $usuario->username }}</p>
+                            <p class="truncate text-sm text-gray-500">{{ $usuario->username }}</p>
                             <p class="mt-2 text-xs text-gray-500">
                                 {{ $usuario->followers_count }} seguidores · {{ $usuario->posts_count }} publicaciones
                             </p>
