@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">DevStagram</title>
+  <defs>
+    <linearGradient id="accent" x1="96" y1="96" x2="416" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#c026d3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="104" fill="#071230"/>
+  <path d="M126 164h52l25-38h106l25 38h52c31 0 56 25 56 56v160c0 31-25 56-56 56H126c-31 0-56-25-56-56V220c0-31 25-56 56-56Z" fill="none" stroke="url(#accent)" stroke-width="26" stroke-linejoin="round"/>
+  <circle cx="256" cy="298" r="91" fill="none" stroke="#fff" stroke-width="24"/>
+  <path d="m229 263-36 35 36 35M283 263l36 35-36 35" fill="none" stroke="url(#accent)" stroke-width="23" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="374" cy="220" r="14" fill="#fff"/>
+</svg>
