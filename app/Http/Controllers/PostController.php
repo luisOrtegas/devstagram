@@ -17,7 +17,11 @@ class PostController extends Controller
     public function index(User $user) 
     {    
 
-        $posts = Post::where('user_id', $user->id)->latest()->paginate(20);
+        $posts = Post::with('user')
+            ->withCount(['likes', 'comentarios'])
+            ->where('user_id', $user->id)
+            ->latest()
+            ->paginate(20);
 
         
         return view('dashboard', [
@@ -72,6 +76,8 @@ class PostController extends Controller
     public function show(User $user, Post $post)
     {
         abort_unless($post->user_id === $user->id, 404);
+
+        $post->load(['user', 'likes', 'comentarios.user']);
 
         return view('posts.show', [
             'post' => $post,
