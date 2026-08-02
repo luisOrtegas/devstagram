@@ -15,11 +15,18 @@
 
             <div class="p-5 sm:p-6">
                 <div class="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                        <a href="{{ route('posts.index', $post->user) }}" class="font-black text-gray-900 hover:text-sky-600">
-                            {{ $post->user->name }}
-                        </a>
-                        <p class="text-sm text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
+                    <div class="flex min-w-0 items-center gap-3">
+                        <img
+                            src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/usuario.svg') }}"
+                            alt="Perfil de {{ $post->user->name }}"
+                            class="h-11 w-11 shrink-0 rounded-full border border-gray-200 object-cover"
+                        >
+                        <div class="min-w-0">
+                            <a href="{{ route('posts.index', $post->user) }}" class="block truncate font-black text-gray-900 hover:text-sky-600">
+                                {{ $post->user->name }}
+                            </a>
+                            <p class="text-sm text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
+                        </div>
                     </div>
 
                     @auth
