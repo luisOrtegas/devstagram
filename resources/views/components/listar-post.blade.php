@@ -30,7 +30,7 @@
                             {{ $post->titulo }}
                         </h3>
 
-                        @if ($post->descripcion)
+                        @if ($post->descripcion && trim($post->descripcion) !== 'Imagen disponible en la galería local de Devstagram.')
                             <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-gray-600">{{ $post->descripcion }}</p>
                         @endif
 
