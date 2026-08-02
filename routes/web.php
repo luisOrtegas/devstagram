@@ -12,6 +12,7 @@ use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,9 @@ Route::post('/register', [RegisterController::class, 'store']);
 
 Route::get('/login', [LoginController::class, 'index'])->name('login'); 
 Route::post('/login', [LoginController::class, 'store']);
+Route::get('/bienvenida', WelcomeController::class)
+    ->middleware('auth')
+    ->name('welcome');
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/buscar', [SearchController::class, 'index'])->name('users.search');
