@@ -88,7 +88,7 @@ class DemoDataSeeder extends Seeder
             ->values();
 
         Post::where('descripcion', 'Imagen disponible en la galería local de Devstagram.')
-            ->update(['descripcion' => null]);
+            ->update(['descripcion' => '']);
 
         foreach ($availableImages as $imageIndex => $file) {
             $user = $users[$imageIndex % $users->count()];
@@ -99,7 +99,7 @@ class DemoDataSeeder extends Seeder
                 [
                     'user_id' => $user->id,
                     'titulo' => 'Galería Devstagram ' . ($imageIndex + 1),
-                    'descripcion' => null,
+                    'descripcion' => '',
                 ]
             );
         }
