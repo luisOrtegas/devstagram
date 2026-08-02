@@ -8,14 +8,14 @@
 @section('contenido')
     
     <div class="flex justify-center">
-        <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
-          <div class="w-8/12 lg:w-6/12 px-5">
-              <img src="{{ $user->imagen ? asset('perfiles') . '/' . $user->imagen : asset('img/usuario.svg') }}" alt="imagen usuario" />
+        <div class="flex w-full max-w-3xl flex-col items-center gap-6 rounded-xl bg-white p-5 shadow sm:p-8 md:flex-row">
+          <div class="w-40 shrink-0 sm:w-48">
+              <img src="{{ $user->imagen ? asset('perfiles') . '/' . $user->imagen : asset('img/usuario.svg') }}" alt="Perfil de {{ $user->name }}" class="aspect-square w-full rounded-full object-cover" />
           </div>
-          <div class="md:w-8/12 lg:w-6/12 px-5 flex flex-col items-center md:justify-center md:items-start py-10 md:py-10">
+          <div class="flex min-w-0 flex-1 flex-col items-center md:items-start">
                  
             <div class="flex items-center gap-2">
-              <p class="text-gray-700 text-2xl">{{ $user->username }}</p>  
+              <p class="max-w-full break-words text-2xl text-gray-700">{{ $user->username }}</p>
 
               @auth
                 @if ($user->id === auth()->user()->id) 
@@ -81,8 +81,8 @@
             </div>
         </div>
 
-    <section class="container mx-auto mt-10">
-        <h2 class="text-4xl text-center font-black my-10">Publicaciones</h2>
+    <section class="mt-10">
+        <h2 class="my-8 text-center text-3xl font-black sm:my-10 sm:text-4xl">Publicaciones</h2>
         <x-listar-post :posts="$posts" /> 
       
     </section>
