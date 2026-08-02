@@ -40,7 +40,7 @@
                         class="flex min-w-0 items-center gap-4 rounded-xl bg-white p-4 shadow transition hover:-translate-y-1 hover:shadow-lg sm:p-5"
                     >
                         <img
-                            src="{{ $usuario->imagen ? asset('perfiles/' . $usuario->imagen) : asset('img/usuario.svg') }}"
+                            src="{{ $usuario->imagen ? asset('perfiles/' . $usuario->imagen) : asset('img/devstagram-icon.svg') }}"
                             alt="Perfil de {{ $usuario->username }}"
                             class="h-14 w-14 shrink-0 rounded-full object-cover sm:h-16 sm:w-16"
                         />
