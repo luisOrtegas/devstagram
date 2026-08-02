@@ -30,7 +30,7 @@
                             {{ $post->titulo }}
                         </h3>
 
-                        @if ($post->descripcion && !\Illuminate\Support\Str::contains(\Illuminate\Support\Str::lower($post->descripcion), 'galería local de devstagram'))
+                        @if ($post->descripcion && !\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
                             <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-gray-600">{{ $post->descripcion }}</p>
                         @endif
 
@@ -49,6 +49,18 @@
                                 {{ $post->comentarios_count }} comentarios
                             </span>
                         </div>
+
+                        @auth
+                            @if ($post->user_id === auth()->id())
+                                <form action="{{ route('posts.destroy', $post) }}" method="POST" class="mt-4 border-t border-gray-100 pt-4">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="w-full rounded-lg bg-red-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-red-600">
+                                        Eliminar publicación
+                                    </button>
+                                </form>
+                            @endif
+                        @endauth
                     </div>
                 </article>
             @endforeach
