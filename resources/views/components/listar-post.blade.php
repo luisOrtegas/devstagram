@@ -26,9 +26,11 @@
                             <span class="shrink-0">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
 
-                        <h3 class="break-words text-lg font-black text-gray-900">
-                            {{ $post->titulo }}
-                        </h3>
+                        @unless (\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
+                            <h3 class="break-words text-lg font-black text-gray-900">
+                                {{ $post->titulo }}
+                            </h3>
+                        @endunless
 
                         @if ($post->descripcion && !\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
                             <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-gray-600">{{ $post->descripcion }}</p>
