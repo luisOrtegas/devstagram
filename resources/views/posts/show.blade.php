@@ -16,17 +16,17 @@
             <div class="p-5 sm:p-6">
                 <div class="flex flex-wrap items-start justify-between gap-3">
                     <div class="flex min-w-0 items-center gap-3">
-                        <img
-                            src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/usuario.svg') }}"
-                            alt="Perfil de {{ $post->user->name }}"
-                            class="h-11 w-11 shrink-0 rounded-full border border-gray-200 object-cover"
-                        >
                         <div class="min-w-0">
                             <a href="{{ route('posts.index', $post->user) }}" class="block truncate font-black text-gray-900 hover:text-sky-600">
                                 {{ $post->user->name }}
                             </a>
                             <p class="text-sm text-gray-500">{{ $post->created_at->diffForHumans() }}</p>
                         </div>
+                        <img
+                            src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/devstagram-icon.svg') }}"
+                            alt="Perfil de {{ $post->user->name }}"
+                            class="h-11 w-11 shrink-0 rounded-full border border-gray-200 object-cover"
+                        >
                     </div>
 
                     @auth
@@ -104,7 +104,7 @@
                     @forelse ($post->comentarios as $comentario)
                         <div class="flex gap-3 rounded-lg border border-gray-200 p-4">
                             <img
-                                src="{{ $comentario->user->imagen ? asset('perfiles/' . $comentario->user->imagen) : asset('img/usuario.svg') }}"
+                                src="{{ $comentario->user->imagen ? asset('perfiles/' . $comentario->user->imagen) : asset('img/devstagram-icon.svg') }}"
                                 alt="Foto de {{ $comentario->user->name }}"
                                 class="h-10 w-10 shrink-0 rounded-full object-cover"
                                 loading="lazy"
