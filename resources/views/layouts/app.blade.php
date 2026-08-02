@@ -41,8 +41,13 @@
                             Crear
                         </a>
 
-                        <a href="{{ route('posts.index', auth()->user()->username) }}" class="truncate rounded-lg px-3 py-2 text-center text-sm font-bold text-gray-600 hover:bg-gray-100">
-                            {{ auth()->user()->username }}
+                        <a href="{{ route('posts.index', auth()->user()->username) }}" class="flex min-w-0 items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-bold text-gray-600 hover:bg-gray-100">
+                            <span class="truncate">{{ auth()->user()->username }}</span>
+                            <img
+                                src="{{ auth()->user()->imagen ? asset('perfiles/' . auth()->user()->imagen) : asset('img/usuario.svg') }}"
+                                alt="Perfil de {{ auth()->user()->name }}"
+                                class="h-8 w-8 shrink-0 rounded-full border border-gray-200 object-cover"
+                            >
                         </a>
 
                         <form method="POST" action="{{ route('logout') }}">
