@@ -39,8 +39,13 @@
         }
         .icon {
             position: relative;
+            display: block;
             width: min(42vw, 180px);
+            height: auto;
+            padding: 10px;
             border-radius: 34px;
+            object-fit: contain;
+            background: #071230;
             box-shadow: 0 0 58px rgba(34, 211, 238, .3);
             animation: icon 1.15s cubic-bezier(.2, .85, .2, 1) both;
         }
@@ -92,7 +97,16 @@
 <body>
     <main class="welcome" role="status" aria-live="polite">
         <div class="glow" aria-hidden="true"></div>
-        <img src="{{ asset('img/devstagram-icon.svg') }}" alt="DevStagram" class="icon">
+        <picture>
+            <source srcset="{{ asset('img/devstagram-icon-256.webp') }}" type="image/webp">
+            <img
+                src="{{ asset('img/devstagram-icon-256.png') }}"
+                alt="DevStagram"
+                width="256"
+                height="256"
+                class="icon"
+            >
+        </picture>
         <h1>Bienvenido, {{ $user->name }}</h1>
         <p>Tu comunidad está lista.</p>
         <a href="{{ $redirectUrl }}">Continuar ahora</a>
