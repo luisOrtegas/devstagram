@@ -31,7 +31,7 @@
 
                 <h1 class="mt-5 break-words text-2xl font-black text-gray-900">{{ $post->titulo }}</h1>
 
-                @if ($post->descripcion && !\Illuminate\Support\Str::contains(\Illuminate\Support\Str::lower($post->descripcion), 'galería local de devstagram'))
+                @if ($post->descripcion && !\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
                     <p class="mt-3 whitespace-pre-line break-words leading-7 text-gray-700">{{ $post->descripcion }}</p>
                 @endif
 
