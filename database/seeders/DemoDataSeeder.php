@@ -87,7 +87,7 @@ class DemoDataSeeder extends Seeder
             })
             ->values();
 
-        Post::where('descripcion', 'Imagen disponible en la galería local de Devstagram.')
+        Post::where('titulo', 'like', 'Galería Devstagram %')
             ->update(['descripcion' => '']);
 
         foreach ($availableImages as $imageIndex => $file) {
