@@ -18,12 +18,12 @@ class Post extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class)->select(['name', 'username']);
+        return $this->belongsTo(User::class);
     }
 
     public function comentarios()
     {
-        return $this->hasMany(Comentario::class);
+        return $this->hasMany(Comentario::class)->latest();
     }
 
     public function likes()
@@ -36,4 +36,3 @@ class Post extends Model
         return $this->likes->contains('user_id', $user->id);
     }
 }
-
