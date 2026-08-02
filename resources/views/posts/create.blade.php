@@ -5,17 +5,17 @@
 @endsection 
 
 @section('contenido')
-   <div class="md:flex md:items-center">
-      <div class="md:w-1/2 px-10">
+   <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 md:items-center md:gap-10">
+      <div class="min-w-0">
          <form action="{{ route('imagenes.store') }}" method="POST" 
           enctype="multipart/form-data" id="dropzone" 
-          class="dropzone border-dashed border-2 w-full h-96 rounded flex 
-          flex-col justify-center items-center">
+          class="dropzone flex h-64 w-full flex-col items-center justify-center rounded-xl border-2 border-dashed sm:h-80 md:h-96
+          ">
              @csrf
          </form>
       </div> 
 
-      <div class="md:w-1/2 p-10 bg-white rounded-lg shadow-xl mt-10 md:mt-0">
+      <div class="rounded-xl bg-white p-5 shadow-xl sm:p-8 lg:p-10">
         <form action="{{ route('posts.store') }}" method="POST" id="post-form" novalidate>
             @csrf
             <div class="mb-5">
@@ -42,7 +42,7 @@
                     id="descripcion"
                     name="descripcion"
                     placeholder="Descripcion de la Publicacion"
-                    class="border p-3 w-full rounded-lg @error('titulo') border-red-500 
+                    class="min-h-28 w-full rounded-lg border p-3 @error('descripcion') border-red-500
                     @enderror">{{ old('descripcion') }}</textarea> 
 
                 @error('descripcion')
