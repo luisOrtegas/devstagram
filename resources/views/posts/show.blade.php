@@ -8,7 +8,7 @@
             <div class="flex min-h-80 items-center justify-center bg-gray-950">
                 <img
                     src="{{ asset('uploads/' . $post->imagen) }}"
-                    alt="Imagen de la publicación {{ $post->titulo }}"
+                    alt="{{ \Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram') ? 'Imagen publicada en Devstagram' : 'Imagen de la publicación ' . $post->titulo }}"
                     class="max-h-[70vh] w-full object-contain"
                 >
             </div>
