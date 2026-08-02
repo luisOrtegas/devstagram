@@ -4,7 +4,7 @@
 
 @section('contenido')
     <div class="mx-auto max-w-4xl px-4">
-        <form action="{{ route('users.search') }}" method="GET" class="mb-10 flex gap-3">
+        <form action="{{ route('users.search') }}" method="GET" class="mb-8 flex flex-col gap-3 sm:mb-10 sm:flex-row">
             <label for="q" class="sr-only">Nombre o usuario</label>
             <input
                 id="q"
@@ -18,7 +18,7 @@
             />
             <button
                 type="submit"
-                class="rounded-lg bg-sky-600 px-6 py-3 font-bold uppercase text-white transition-colors hover:bg-sky-700"
+                class="w-full rounded-lg bg-sky-600 px-6 py-3 font-bold uppercase text-white transition-colors hover:bg-sky-700 sm:w-auto"
             >
                 Buscar
             </button>
@@ -37,12 +37,12 @@
                 @foreach ($usuarios as $usuario)
                     <a
                         href="{{ route('posts.index', $usuario->username) }}"
-                        class="flex items-center gap-4 rounded-xl bg-white p-5 shadow transition hover:-translate-y-1 hover:shadow-lg"
+                        class="flex min-w-0 items-center gap-4 rounded-xl bg-white p-4 shadow transition hover:-translate-y-1 hover:shadow-lg sm:p-5"
                     >
                         <img
                             src="{{ $usuario->imagen ? asset('perfiles/' . $usuario->imagen) : asset('img/usuario.svg') }}"
                             alt="Perfil de {{ $usuario->username }}"
-                            class="h-16 w-16 rounded-full object-cover"
+                            class="h-14 w-14 shrink-0 rounded-full object-cover sm:h-16 sm:w-16"
                         />
                         <div class="min-w-0">
                             <p class="truncate font-bold text-gray-800">{{ $usuario->name }}</p>
