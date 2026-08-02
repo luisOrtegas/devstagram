@@ -19,9 +19,15 @@
                         <div class="mb-3 flex items-center justify-between gap-3 text-sm text-gray-500">
                             <a
                                 href="{{ route('posts.index', $post->user) }}"
-                                class="min-w-0 truncate font-bold text-gray-800 hover:text-sky-600"
+                                class="flex min-w-0 items-center gap-2 font-bold text-gray-800 hover:text-sky-600"
                             >
-                                {{ $post->user->name }}
+                                <img
+                                    src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/usuario.svg') }}"
+                                    alt="Perfil de {{ $post->user->name }}"
+                                    class="h-9 w-9 shrink-0 rounded-full border border-gray-200 object-cover"
+                                    loading="lazy"
+                                >
+                                <span class="truncate">{{ $post->user->name }}</span>
                             </a>
                             <span class="shrink-0">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
