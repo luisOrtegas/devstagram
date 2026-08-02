@@ -64,9 +64,11 @@
         </header>
 
         <main class="mx-auto w-full max-w-7xl flex-1 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-            <h2 class="mb-8 break-words text-center text-2xl font-black sm:mb-10 sm:text-3xl">
-                @yield('titulo')
-            </h2>
+            @if (trim($__env->yieldContent('titulo')) !== '')
+                <h2 class="mb-8 break-words text-center text-2xl font-black sm:mb-10 sm:text-3xl">
+                    @yield('titulo')
+                </h2>
+            @endif
             @yield('contenido')
         </main>
 
