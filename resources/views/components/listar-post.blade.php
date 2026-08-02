@@ -21,13 +21,13 @@
                                 href="{{ route('posts.index', $post->user) }}"
                                 class="flex min-w-0 items-center gap-2 font-bold text-gray-800 hover:text-sky-600"
                             >
+                                <span class="truncate">{{ $post->user->name }}</span>
                                 <img
-                                    src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/usuario.svg') }}"
+                                    src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/devstagram-icon.svg') }}"
                                     alt="Perfil de {{ $post->user->name }}"
                                     class="h-9 w-9 shrink-0 rounded-full border border-gray-200 object-cover"
                                     loading="lazy"
                                 >
-                                <span class="truncate">{{ $post->user->name }}</span>
                             </a>
                             <span class="shrink-0">{{ $post->created_at->diffForHumans() }}</span>
                         </div>
