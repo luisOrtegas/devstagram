@@ -5,8 +5,8 @@
 @endsection
 
 @section('contenido')
-    <div class="md:flex md:justify-center">
-        <div class="md:w-1/2 bg-white shadow p-6">
+    <div class="mx-auto max-w-2xl">
+        <div class="rounded-xl bg-white p-5 shadow sm:p-8">
             <form method="POST" action="{{ route('perfil.store') }}" enctype="multipart/form-data" class="mt-10 md:mt-0"> 
                 @csrf 
                 <div class="mb-5">
