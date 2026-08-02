@@ -7,14 +7,16 @@
         <title>DevStagram - @yield('titulo')</title>
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        <link rel="icon" type="image/svg+xml" href="{{ asset('img/devstagram-icon.svg') }}">
+        <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
     </head>
     <body class="flex min-h-screen flex-col bg-gray-100">
         <header class="border-b bg-white shadow-sm">
             <div class="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
                 <div class="flex items-center justify-between">
-                    <a href="{{ route('home') }}" class="text-2xl font-black text-gray-900 sm:text-3xl">
-                        DevStagram
+                    <a href="{{ route('home') }}" class="flex items-center gap-3 text-2xl font-black text-gray-900 sm:text-3xl">
+                        <img src="{{ asset('img/devstagram-icon.svg') }}" alt="" class="h-10 w-10 rounded-xl sm:h-11 sm:w-11">
+                        <span>DevStagram</span>
                     </a>
 
                     <a href="{{ route('home') }}" class="rounded-lg p-2 text-gray-600 hover:bg-gray-100" aria-label="Ir al inicio">
