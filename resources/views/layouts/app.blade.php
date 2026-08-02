@@ -11,6 +11,21 @@
         <link rel="alternate icon" href="{{ asset('favicon.ico') }}">
     </head>
     <body class="flex min-h-screen flex-col bg-gray-100">
+        @if (session('welcome'))
+            <div class="devstagram-welcome" role="status" aria-live="polite">
+                <div class="devstagram-welcome__content">
+                    <div class="devstagram-welcome__glow" aria-hidden="true"></div>
+                    <img
+                        src="{{ asset('img/devstagram-icon.svg') }}"
+                        alt="DevStagram"
+                        class="devstagram-welcome__icon"
+                    >
+                    <p class="devstagram-welcome__title">Bienvenido, {{ auth()->user()->name }}</p>
+                    <p class="devstagram-welcome__message">Tu comunidad está lista.</p>
+                </div>
+            </div>
+        @endif
+
         <header class="border-b bg-white shadow-sm">
             <div class="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
                 <div class="flex items-center justify-between">
