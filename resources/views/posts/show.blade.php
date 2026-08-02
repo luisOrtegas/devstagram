@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('titulo', $post->titulo)
+@section('titulo', \Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram') ? '' : $post->titulo)
 
 @section('contenido')
     <article class="mx-auto grid max-w-6xl overflow-hidden rounded-xl bg-white shadow-lg lg:grid-cols-2">
@@ -29,7 +29,9 @@
                     @endauth
                 </div>
 
-                <h1 class="mt-5 break-words text-2xl font-black text-gray-900">{{ $post->titulo }}</h1>
+                @unless (\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
+                    <h1 class="mt-5 break-words text-2xl font-black text-gray-900">{{ $post->titulo }}</h1>
+                @endunless
 
                 @if ($post->descripcion && !\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
                     <p class="mt-3 whitespace-pre-line break-words leading-7 text-gray-700">{{ $post->descripcion }}</p>
