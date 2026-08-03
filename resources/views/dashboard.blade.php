@@ -19,7 +19,13 @@
     <div class="flex justify-center">
         <div class="flex w-full max-w-3xl flex-col items-center gap-6 rounded-xl bg-white p-5 shadow sm:p-8 md:flex-row">
           <div class="w-40 shrink-0 sm:w-48">
-              <img src="{{ $user->imagen ? asset('perfiles') . '/' . $user->imagen : asset('img/devstagram-icon.svg') }}" alt="Perfil de {{ $user->name }}" class="aspect-square w-full rounded-full object-cover" />
+              <img
+                  src="{{ $user->imagen ? asset('perfiles') . '/' . $user->imagen : asset('img/devstagram-icon.svg') }}"
+                  alt="Perfil de {{ $user->name }}"
+                  class="aspect-square w-full rounded-full border border-gray-200 object-cover"
+                  width="192"
+                  height="192"
+              />
           </div>
           <div class="flex min-w-0 flex-1 flex-col items-center md:items-start">
                  
