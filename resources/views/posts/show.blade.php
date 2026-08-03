@@ -46,7 +46,12 @@
 
                 @auth
                     @if ($post->user_id === auth()->id())
-                        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="mt-6">
+                        <form
+                            action="{{ route('posts.destroy', $post) }}"
+                            method="POST"
+                            class="mt-6"
+                            onsubmit="return confirm('¿Deseas eliminar esta publicación? Esta acción no se puede deshacer.')"
+                        >
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="rounded-lg bg-red-500 px-4 py-2 font-bold text-white transition hover:bg-red-600">
