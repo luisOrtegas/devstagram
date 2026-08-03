@@ -64,6 +64,9 @@
                                 src="{{ auth()->user()->imagen ? asset('perfiles/' . auth()->user()->imagen) : asset('img/devstagram-icon.svg') }}"
                                 alt="Perfil de {{ auth()->user()->name }}"
                                 class="h-8 w-8 shrink-0 rounded-full border border-gray-200 object-cover"
+                                width="32"
+                                height="32"
+                                style="width: 2rem; height: 2rem; min-width: 2rem; max-width: 2rem;"
                             >
                         </a>
 
