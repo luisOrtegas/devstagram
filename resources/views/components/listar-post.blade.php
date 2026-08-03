@@ -26,6 +26,9 @@
                                     src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/devstagram-icon.svg') }}"
                                     alt="Perfil de {{ $post->user->name }}"
                                     class="h-9 w-9 shrink-0 rounded-full border border-gray-200 object-cover"
+                                    width="36"
+                                    height="36"
+                                    style="width: 2.25rem; height: 2.25rem; min-width: 2.25rem; max-width: 2.25rem;"
                                     loading="lazy"
                                 >
                             </a>
@@ -79,9 +82,62 @@
             @endforeach
         </div>
 
-        <div class="my-10">
-            {{ $posts->links() }}
-        </div>
+        @if ($posts->hasPages())
+            <nav class="my-10" role="navigation" aria-label="Paginación de publicaciones">
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    @if ($posts->onFirstPage())
+                        <span class="cursor-not-allowed rounded-lg border border-gray-200 bg-gray-100 px-4 py-2 text-sm font-bold text-gray-400">
+                            Anterior
+                        </span>
+                    @else
+                        <a
+                            href="{{ $posts->previousPageUrl() }}"
+                            rel="prev"
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-bold text-gray-700 transition hover:border-sky-600 hover:bg-sky-50 hover:text-sky-700"
+                        >
+                            Anterior
+                        </a>
+                    @endif
+
+                    @foreach ($posts->getUrlRange(1, $posts->lastPage()) as $pagina => $url)
+                        @if ($pagina === $posts->currentPage())
+                            <span
+                                aria-current="page"
+                                class="flex h-10 min-w-10 items-center justify-center rounded-lg bg-sky-600 px-3 text-sm font-black text-white"
+                            >
+                                {{ $pagina }}
+                            </span>
+                        @else
+                            <a
+                                href="{{ $url }}"
+                                class="flex h-10 min-w-10 items-center justify-center rounded-lg border border-gray-300 bg-white px-3 text-sm font-bold text-gray-700 transition hover:border-sky-600 hover:bg-sky-50 hover:text-sky-700"
+                                aria-label="Ir a la página {{ $pagina }}"
+                            >
+                                {{ $pagina }}
+                            </a>
+                        @endif
+                    @endforeach
+
+                    @if ($posts->hasMorePages())
+                        <a
+                            href="{{ $posts->nextPageUrl() }}"
+                            rel="next"
+                            class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-bold text-gray-700 transition hover:border-sky-600 hover:bg-sky-50 hover:text-sky-700"
+                        >
+                            Siguiente
+                        </a>
+                    @else
+                        <span class="cursor-not-allowed rounded-lg border border-gray-200 bg-gray-100 px-4 py-2 text-sm font-bold text-gray-400">
+                            Siguiente
+                        </span>
+                    @endif
+                </div>
+
+                <p class="mt-3 text-center text-sm text-gray-500">
+                    Mostrando {{ $posts->firstItem() }}–{{ $posts->lastItem() }} de {{ $posts->total() }} publicaciones
+                </p>
+            </nav>
+        @endif
     @else
         <p class="rounded-lg bg-white p-10 text-center shadow">
             No hay publicaciones. Sigue a alguien para ver sus publicaciones.
