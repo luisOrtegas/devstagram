@@ -26,6 +26,9 @@
                             src="{{ $post->user->imagen ? asset('perfiles/' . $post->user->imagen) : asset('img/devstagram-icon.svg') }}"
                             alt="Perfil de {{ $post->user->name }}"
                             class="h-11 w-11 shrink-0 rounded-full border border-gray-200 object-cover"
+                            width="44"
+                            height="44"
+                            style="width: 2.75rem; height: 2.75rem; min-width: 2.75rem; max-width: 2.75rem;"
                         >
                     </div>
 
@@ -112,6 +115,9 @@
                                 src="{{ $comentario->user->imagen ? asset('perfiles/' . $comentario->user->imagen) : asset('img/devstagram-icon.svg') }}"
                                 alt="Foto de {{ $comentario->user->name }}"
                                 class="h-10 w-10 shrink-0 rounded-full object-cover"
+                                width="40"
+                                height="40"
+                                style="width: 2.5rem; height: 2.5rem; min-width: 2.5rem; max-width: 2.5rem;"
                                 loading="lazy"
                             >
                             <div class="min-w-0 flex-1">
