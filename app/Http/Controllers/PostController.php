@@ -87,19 +87,24 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-       $this->authorize('delete', $post);
-       $post->delete();
+        $this->authorize('delete', $post);
 
-     //Eliminar la imagen       
-     $imagen_path = public_path('uploads/' . $post->imagen);   
+        $titulo = $post->titulo;
+        $imagen = $post->imagen;
 
-     if(File::exists($imagen_path))
-     {
-        unlink($imagen_path);
-      
-     }
-       
-       return redirect()->route('posts.index', auth()->user()->username);
+        $post->delete();
 
+        // La imagen solo se elimina si ninguna otra publicación la utiliza.
+        if (! Post::where('imagen', $imagen)->exists()) {
+            $imagenPath = public_path('uploads/' . $imagen);
+
+            if (File::exists($imagenPath)) {
+                File::delete($imagenPath);
+            }
+        }
+
+        return redirect()
+            ->route('posts.index', auth()->user()->username)
+            ->with('mensaje', "La publicación «{$titulo}» fue eliminada correctamente.");
     }
 }
