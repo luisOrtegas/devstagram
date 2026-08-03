@@ -6,6 +6,15 @@
 
 
 @section('contenido')
+
+    @if (session('mensaje'))
+        <div
+            role="status"
+            class="mx-auto mb-6 max-w-3xl rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-center font-bold text-green-800"
+        >
+            {{ session('mensaje') }}
+        </div>
+    @endif
     
     <div class="flex justify-center">
         <div class="flex w-full max-w-3xl flex-col items-center gap-6 rounded-xl bg-white p-5 shadow sm:p-8 md:flex-row">
