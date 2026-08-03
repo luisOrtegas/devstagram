@@ -42,7 +42,10 @@
                         <img
                             src="{{ $usuario->imagen ? asset('perfiles/' . $usuario->imagen) : asset('img/devstagram-icon.svg') }}"
                             alt="Perfil de {{ $usuario->username }}"
-                            class="h-14 w-14 shrink-0 rounded-full object-cover sm:h-16 sm:w-16"
+                            class="h-16 w-16 shrink-0 rounded-full border border-gray-200 object-cover"
+                            width="64"
+                            height="64"
+                            style="width: 4rem; height: 4rem; min-width: 4rem; max-width: 4rem;"
                         />
                         <div class="min-w-0">
                             <p class="truncate font-bold text-gray-800">{{ $usuario->name }}</p>
