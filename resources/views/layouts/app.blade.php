@@ -98,15 +98,29 @@
                                 class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl"
                                 style="position: absolute; top: 100%; right: 0; z-index: 50; width: min(24rem, calc(100vw - 2rem)); margin-top: 0.5rem;"
                             >
+                                <p class="bg-gray-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-gray-500">Perfil</p>
                                 <a
-                                    href="{{ route('posts.index', auth()->user()->username) }}"
+                                    href="{{ route('perfil.index') }}"
                                     class="flex items-center gap-3 border-b border-gray-200 px-4 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-5 w-5 text-gray-500" aria-hidden="true">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                     </svg>
-                                    Ver mi perfil
+                                    Perfil de usuario
                                 </a>
+
+                                <p class="bg-gray-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-gray-500">Contenido</p>
+                                <a
+                                    href="{{ route('posts.index', auth()->user()->username) }}"
+                                    class="flex items-center gap-3 border-b border-gray-200 px-4 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-5 w-5 text-gray-500" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5 3 9.75l3.75 2.25m10.5-4.5L21 9.75 17.25 12M6.75 16.5 3 14.25 6.75 12m10.5 4.5L21 14.25 17.25 12M9 5.25l6 13.5" />
+                                    </svg>
+                                    Publicaciones
+                                </a>
+
+                                <p class="bg-gray-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-gray-500">Actividad</p>
 
                                 <details>
                                     <summary class="flex cursor-pointer list-none items-center justify-between gap-3 border-b border-gray-200 px-4 py-3 text-sm font-bold text-gray-700 hover:bg-gray-50">
@@ -190,6 +204,7 @@
                                     </div>
                                 </details>
 
+                                <p class="bg-gray-50 px-4 py-2 text-xs font-black uppercase tracking-wide text-gray-500">Cuenta</p>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-bold text-red-600 hover:bg-red-50">
