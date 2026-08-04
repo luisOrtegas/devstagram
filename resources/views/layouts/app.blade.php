@@ -63,21 +63,17 @@
                         </a>
 
                         <details class="relative col-span-2 sm:col-auto">
-                            <summary class="flex cursor-pointer list-none items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-bold text-gray-600 hover:bg-gray-50">
-                                <span class="truncate">{{ auth()->user()->username }}</span>
+                            <summary class="flex cursor-pointer list-none items-center justify-center gap-2 rounded-lg border px-3 py-2 text-sm font-bold uppercase text-gray-600 hover:bg-gray-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-5 w-5 shrink-0" aria-hidden="true">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.592c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a6.759 6.759 0 0 1 0 .255c-.008.378.137.75.43.992l1.003.827c.424.35.534.955.26 1.43l-1.296 2.247a1.125 1.125 0 0 1-1.37.49l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.592c-.55 0-1.02-.397-1.11-.94l-.213-1.281c-.063-.374-.313-.686-.645-.87a6.52 6.52 0 0 1-.22-.127c-.324-.196-.72-.257-1.075-.124l-1.217.456a1.125 1.125 0 0 1-1.37-.49l-1.296-2.247a1.125 1.125 0 0 1 .26-1.431l1.003-.827c.293-.242.438-.614.43-.992a6.759 6.759 0 0 1 0-.255c.008-.379-.137-.751-.43-.992l-1.003-.827a1.125 1.125 0 0 1-.26-1.431l1.296-2.247a1.125 1.125 0 0 1 1.37-.49l1.217.456c.355.133.75.072 1.076-.124.072-.044.146-.087.22-.128.331-.183.581-.495.644-.869l.213-1.281Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                <span>Configuración</span>
                                 @if ($notificacionesSinLeer > 0)
                                     <span class="flex h-5 min-w-5 items-center justify-center rounded-full bg-red-600 px-1 text-xs font-black text-white" aria-label="{{ $notificacionesSinLeer }} notificaciones sin leer">
                                         {{ $notificacionesSinLeer > 99 ? '99+' : $notificacionesSinLeer }}
                                     </span>
                                 @endif
-                                <img
-                                    src="{{ auth()->user()->imagen ? asset('perfiles/' . auth()->user()->imagen) : asset('img/devstagram-icon.svg') }}"
-                                    alt="Perfil de {{ auth()->user()->name }}"
-                                    class="h-8 w-8 shrink-0 rounded-full border border-gray-200 object-cover"
-                                    width="32"
-                                    height="32"
-                                    style="width: 2rem; height: 2rem; min-width: 2rem; max-width: 2rem;"
-                                >
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 shrink-0" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
