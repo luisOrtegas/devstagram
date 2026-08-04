@@ -20,18 +20,20 @@ class SearchController extends Controller
 
         $query = trim((string) $request->query('q', ''));
 
-        $usuarios = User::query()
-            ->whereKeyNot(auth()->id())
-            ->when($query !== '', function ($builder) use ($query) {
-                $builder->where(function ($users) use ($query) {
+        $usuarios = null;
+
+        if ($query !== '') {
+            $usuarios = User::query()
+                ->whereKeyNot(auth()->id())
+                ->where(function ($users) use ($query) {
                     $users->where('username', 'like', "%{$query}%")
                         ->orWhere('name', 'like', "%{$query}%");
-                });
-            })
-            ->withCount(['followers', 'posts'])
-            ->orderBy('username')
-            ->paginate(12)
-            ->withQueryString();
+                })
+                ->withCount(['followers', 'posts'])
+                ->orderBy('username')
+                ->paginate(12)
+                ->withQueryString();
+        }
 
         return view('users.search', [
             'query' => $query,
