@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\NewPostNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 
 class PostController extends Controller
 {
@@ -62,13 +64,21 @@ class PostController extends Controller
         // $post->save();
 
 
-        $request->user()->posts()->create([
+        $post = $request->user()->posts()->create([
              'titulo' => $request->titulo,
              'descripcion' => $request->descripcion,
              'imagen' => $request->imagen,
              'user_id' => auth()->user()->id
         ]);
 
+        $followers = $request->user()->followers()->get();
+
+        if ($followers->isNotEmpty()) {
+            Notification::send(
+                $followers,
+                new NewPostNotification($post, $request->user())
+            );
+        }
 
         return redirect()->route('posts.index', auth()->user()->username);
     }
