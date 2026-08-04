@@ -5,12 +5,12 @@
 @endsection
 
 @section('contenido')
-    <div class="md:flex md:justify-center md:gap-10 md:items-center">
-        <div class="md:w-6/12 p-5">
-          <img src="{{ asset('img/login.jpg') }}" alt="imagen login  de usuarios">
+    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 md:items-center md:gap-10">
+        <div class="overflow-hidden rounded-xl">
+          <img src="{{ asset('img/login.jpg') }}" alt="Iniciar sesión en DevStagram" class="h-56 w-full object-cover sm:h-72 md:h-full">
         </div>
 
-        <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
+        <div class="rounded-xl bg-white p-5 shadow-xl sm:p-8">
             <form method="POST" action="{{ route('login') }}" novalidate>
                 @csrf
 
@@ -27,9 +27,8 @@
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="Tu Email de Registro"
-                        placeholder="Tu Nombre"
-                        class="borde p-3 w-full rounded-lg @error('email') border-red-500 @enderror"
+                        placeholder="Tu correo de registro"
+                        class="w-full rounded-lg border p-3 @error('email') border-red-500 @enderror"
                         value="{{ old('email') }}"
                     />
                     @error('email')
@@ -47,9 +46,8 @@
                         id="password"
                         name="password"
                         type="password"
-                        placeholder="Password de Registro"
-                        placeholder="Tu Nombre"
-                        class="borde p-3 w-full rounded-lg @error('password') border-red-500  @enderror"
+                        placeholder="Tu contraseña"
+                        class="w-full rounded-lg border p-3 @error('password') border-red-500 @enderror"
                     />
                     @error('password')
                     <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center"> 

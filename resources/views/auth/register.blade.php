@@ -5,16 +5,16 @@
 @endsection
 
 @section('contenido')
-    <div class="md:flex md:justify-center md:gap-10 md:items-center">
-        <div class="md:w-6/12 p-5">
-          <img src="{{ asset('img/registrar.jpg') }}" alt="imagen registro usuarios">
+    <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 md:items-center md:gap-10">
+        <div class="overflow-hidden rounded-xl">
+          <img src="{{ asset('img/registrar.jpg') }}" alt="Crear una cuenta en DevStagram" class="h-56 w-full object-cover sm:h-72 md:h-full">
         </div>
 
-        <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
+        <div class="rounded-xl bg-white p-5 shadow-xl sm:p-8">
             <form action="{{ route('register') }}" method="POST" novalidate>
                 @csrf
                 <div class="mb-5">
-                    <label for="name" class="mb-2 block uppercase text-gray-500 font-bold">
+                    <label for="username" class="mb-2 block uppercase text-gray-500 font-bold">
                         Nombre
                     </label>
                     <input 
@@ -40,8 +40,7 @@
                         id="username"
                         name="username"
                         type="text"
-                        placeholder="Tu Nombre de Usuario"
-                        placeholder="Tu Nombre"
+                        placeholder="Tu nombre de usuario"
                         class="border p-3 w-full rounded-lg @error('username') border-red-500 @enderror"
                         value="{{ old('username') }}"
                     />
@@ -61,8 +60,7 @@
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="Tu Email de Registro"
-                        placeholder="Tu Nombre"
+                        placeholder="Tu correo de registro"
                         class="border p-3 w-full rounded-lg @error('email') border-red-500 @enderror"
                         value="{{ old('email') }}"
                     />
@@ -81,8 +79,7 @@
                         id="password"
                         name="password"
                         type="password"
-                        placeholder="Password de Registro"
-                        placeholder="Tu Nombre"
+                        placeholder="Tu contraseña"
                         class="border p-3 w-full rounded-lg @error('password') border-red-500  @enderror"
                     />
                     @error('password')
@@ -100,8 +97,7 @@
                         id="password_confirmation"
                         name="password_confirmation"
                         type="password"
-                        placeholder="Repite tu Password"
-                        placeholder="Tu Nombre"
+                        placeholder="Repite tu contraseña"
                         class="border p-3 w-full rounded-lg @error('password_confirmation') border-red-500 @enderror"                  
                     />
                     @error('password_confirmation')

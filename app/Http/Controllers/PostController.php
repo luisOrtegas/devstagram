@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\MentionedInPostNotification;
+use App\Notifications\NewPostNotification;
+use App\Support\MentionFormatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 
 class PostController extends Controller
 {
@@ -17,7 +21,11 @@ class PostController extends Controller
     public function index(User $user) 
     {    
 
-        $posts = Post::where('user_id', $user->id)->latest()->paginate(20);
+        $posts = Post::with('user')
+            ->withCount(['likes', 'comentarios'])
+            ->where('user_id', $user->id)
+            ->latest()
+            ->paginate(20);
 
         
         return view('dashboard', [
@@ -29,15 +37,24 @@ class PostController extends Controller
 
     public function create() 
     {
-        return view('posts.create');
+        $usuarios = User::query()
+            ->whereKeyNot(auth()->id())
+            ->orderBy('name')
+            ->get(['name', 'username', 'imagen']);
+
+        return view('posts.create', [
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
-            'titulo' => 'required|max:255',
-            'titulo' => 'required',
-            'imagen' => 'required|max:1000'
+            'titulo' => ['required', 'string', 'max:255'],
+            'descripcion' => ['nullable', 'string', 'max:2000'],
+            'imagen' => ['required', 'string', 'max:255']
+        ], [
+            'imagen.required' => 'Debes subir una imagen antes de crear la publicación.',
         ]);
 
         //  Post::create([
@@ -56,19 +73,48 @@ class PostController extends Controller
         // $post->save();
 
 
-        $request->user()->posts()->create([
+        $post = $request->user()->posts()->create([
              'titulo' => $request->titulo,
-             'descripcion' => $request->descripcion,
+             'descripcion' => $request->descripcion ?? '',
              'imagen' => $request->imagen,
              'user_id' => auth()->user()->id
         ]);
 
+        $mentionedUsernames = MentionFormatter::usernames($post->descripcion);
+        $mentionedUsers = User::query()
+            ->whereIn('username', $mentionedUsernames)
+            ->whereKeyNot($request->user()->id)
+            ->get();
+
+        $post->mentions()->sync($mentionedUsers->modelKeys());
+
+        foreach ($mentionedUsers as $mentionedUser) {
+            $mentionedUser->notify(
+                new MentionedInPostNotification($post, $request->user())
+            );
+        }
+
+        $followers = $request->user()
+            ->followers()
+            ->whereNotIn('users.id', $mentionedUsers->pluck('id'))
+            ->get();
+
+        if ($followers->isNotEmpty()) {
+            Notification::send(
+                $followers,
+                new NewPostNotification($post, $request->user())
+            );
+        }
 
         return redirect()->route('posts.index', auth()->user()->username);
     }
 
     public function show(User $user, Post $post)
     {
+        abort_unless($post->user_id === $user->id, 404);
+
+        $post->load(['user', 'likes', 'comentarios.user']);
+
         return view('posts.show', [
             'post' => $post,
             'user' => $user
@@ -77,22 +123,24 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-       $this->authorize('delete', $post);
-       $post->delete();
+        $this->authorize('delete', $post);
 
-     //Eliminar la imagen       
-     $imagen_path = public_path('uploads/' . $post->imagen);   
+        $titulo = $post->titulo;
+        $imagen = $post->imagen;
 
-     if(File::exists($imagen_path))
-     {
-        unlink($imagen_path);
-      
-     }
-       
-       return redirect()->route('posts.index', auth()->user()->username);
+        $post->delete();
 
+        // La imagen solo se elimina si ninguna otra publicación la utiliza.
+        if (! Post::where('imagen', $imagen)->exists()) {
+            $imagenPath = public_path('uploads/' . $imagen);
+
+            if (File::exists($imagenPath)) {
+                File::delete($imagenPath);
+            }
+        }
+
+        return redirect()
+            ->route('posts.index', auth()->user()->username)
+            ->with('mensaje', "La publicación «{$titulo}» fue eliminada correctamente.");
     }
 }
-
-
-

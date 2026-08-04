@@ -7,16 +7,19 @@ use Illuminate\Http\Request;
 
 class FollowerController extends Controller
 {
-   
-    public function store(User $user)
+    public function store(Request $request, User $user)
     {
-       $user->followers()->attach( auth()->user()->id );
+       abort_if($request->user()->is($user), 422, 'No puedes seguirte a ti mismo.');
+
+       $user->followers()->syncWithoutDetaching([$request->user()->id]);
+
        return back();
     } 
 
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
-        $user->followers()->detach( auth()->user()->id );
+        $user->followers()->detach($request->user()->id);
+
         return back();
     }
 }

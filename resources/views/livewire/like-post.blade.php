@@ -1,8 +1,8 @@
-<div> 
- <div class="flex gap-2 items-center">  
-      <button wire:click="like">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
-              fill="{{ $isLiked ? "red" : "white" }}" 
+<div>
+ <div class="flex items-center gap-2">
+      <button wire:click="like" type="button" class="rounded-full p-1 transition hover:bg-red-50" aria-label="{{ $isLiked ? 'Quitar Me gusta' : 'Dar Me gusta' }}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-red-500"
+              fill="{{ $isLiked ? 'currentColor' : 'none' }}"
               viewBox="0 0 24 24"
               stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" 
@@ -11,9 +11,8 @@
               7.22 9 12 9 12s9-4.78 9-12z" />
               </svg>
           </button> 
-          <p class="font-bold">{{ $likes }} 
-            <span class="font-normal"> Likes </span>
-          </p> 
+          <p class="font-bold text-gray-700">{{ $likes }}
+            <span class="font-normal">Me gusta</span>
+          </p>
     </div>
 </div>
-    

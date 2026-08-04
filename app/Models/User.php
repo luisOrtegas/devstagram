@@ -21,7 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'username'
+        'username',
+        'telefono',
+        'direccion',
+        'biografia'
     ];
 
     /**
@@ -51,6 +54,11 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function mentionedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'post_mentions')->withTimestamps();
     }
 
     //Almacenar los seguidores de un usuario

@@ -9,7 +9,7 @@ class LikeController extends Controller
 {
     public function store(Request $request, Post $post)
     {
-       $post->likes()->create([
+       $post->likes()->firstOrCreate([
            'user_id' => $request->user()->id
        ]);
         
@@ -18,7 +18,9 @@ class LikeController extends Controller
 
     public function destroy(Request $request, Post $post)
     {
-       $request->user()->likes()->where('post_id', $post->id)->delete(); 
+       $post->likes()
+           ->where('user_id', $request->user()->id)
+           ->delete();
 
        return back();
     }
