@@ -70,7 +70,7 @@
                         <button
                             type="button"
                             class="mention-option hidden w-full items-center gap-3 border-b border-gray-100 p-3 text-left hover:bg-sky-50"
-                            data-search="{{ IlluminateSupportStr::lower($usuario->name . ' ' . $usuario->username) }}"
+                            data-search="{{ \Illuminate\Support\Str::lower($usuario->name . ' ' . $usuario->username) }}"
                             data-username="{{ $usuario->username }}"
                         >
                             <img
