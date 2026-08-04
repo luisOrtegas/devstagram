@@ -82,9 +82,8 @@
             @endforeach
         </div>
 
-        @if ($posts->hasPages())
-            <nav class="my-10" role="navigation" aria-label="Paginación de publicaciones">
-                <div class="flex flex-wrap items-center justify-center gap-2">
+        <nav class="my-10" role="navigation" aria-label="Paginación de publicaciones">
+            <div class="flex flex-wrap items-center justify-center gap-2">
                     @if ($posts->onFirstPage())
                         <span class="cursor-not-allowed rounded-lg border border-gray-200 bg-gray-100 px-4 py-2 text-sm font-bold text-gray-400">
                             Anterior
@@ -131,13 +130,12 @@
                             Siguiente
                         </span>
                     @endif
-                </div>
+            </div>
 
-                <p class="mt-3 text-center text-sm text-gray-500">
-                    Mostrando {{ $posts->firstItem() }}–{{ $posts->lastItem() }} de {{ $posts->total() }} publicaciones
-                </p>
-            </nav>
-        @endif
+            <p class="mt-3 text-center text-sm text-gray-500">
+                Mostrando {{ $posts->firstItem() }}–{{ $posts->lastItem() }} de {{ $posts->total() }} publicaciones
+            </p>
+        </nav>
     @else
         <p class="rounded-lg bg-white p-10 text-center shadow">
             No hay publicaciones. Sigue a alguien para ver sus publicaciones.
