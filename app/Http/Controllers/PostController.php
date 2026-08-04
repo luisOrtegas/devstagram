@@ -86,6 +86,8 @@ class PostController extends Controller
             ->whereKeyNot($request->user()->id)
             ->get();
 
+        $post->mentions()->sync($mentionedUsers->modelKeys());
+
         foreach ($mentionedUsers as $mentionedUser) {
             $mentionedUser->notify(
                 new MentionedInPostNotification($post, $request->user())

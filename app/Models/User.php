@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    public function mentionedPosts()
+    {
+        return $this->belongsToMany(Post::class, 'post_mentions')->withTimestamps();
+    }
+
     //Almacenar los seguidores de un usuario
     public function followers()
     {

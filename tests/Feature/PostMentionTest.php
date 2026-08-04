@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Post;
 use App\Support\MentionFormatter;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,6 +27,12 @@ class PostMentionTest extends TestCase
 
         $this->assertNotNull($notification);
         $this->assertSame('post_mention', $notification->data['kind']);
+
+        $post = Post::where('titulo', 'Publicación con mención')->firstOrFail();
+        $this->assertDatabaseHas('post_mentions', [
+            'post_id' => $post->id,
+            'user_id' => $mentioned->id,
+        ]);
     }
 
     public function test_mentioned_follower_receives_only_one_notification(): void
