@@ -24,7 +24,7 @@ class RegistrationMailTest extends TestCase
         ])->assertRedirect(route('welcome'));
 
         $this->assertDatabaseHas('users', [
-            'username' => 'usuario-nuevo',
+            'username' => 'usuarionuevo',
             'email' => 'nuevo@devstagram.test',
         ]);
 
