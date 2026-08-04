@@ -75,7 +75,7 @@ class PostController extends Controller
 
         $post = $request->user()->posts()->create([
              'titulo' => $request->titulo,
-             'descripcion' => $request->descripcion,
+             'descripcion' => $request->descripcion ?? '',
              'imagen' => $request->imagen,
              'user_id' => auth()->user()->id
         ]);

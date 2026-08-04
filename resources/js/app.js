@@ -11,7 +11,7 @@ const imageError = document.querySelector('#image-error');
 if (dropzoneElement && imageInput) {
     const dropzone = new Dropzone(dropzoneElement, {
         dictDefaultMessage: 'Haz clic o arrastra aquí tu imagen',
-        acceptedFiles: '.png, .jpg, .jpeg, .gif',
+        acceptedFiles: '.png, .jpg, .jpeg, .gif, .webp',
         addRemoveLinks: true,
         dictRemoveFile: 'Borrar archivo',
         maxFiles: 1,

@@ -8,12 +8,20 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DemoDataSeeder extends Seeder
 {
     public function run()
     {
-        $password = Hash::make('Devstagram2026!');
+        $configuredPassword = config('devstagram.demo_password');
+        $plainPassword = $configuredPassword ?: Str::random(20);
+        $password = Hash::make($plainPassword);
+
+        if (! $configuredPassword && $this->command) {
+            $this->command->warn("Contraseña temporal de los perfiles demo: {$plainPassword}");
+            $this->command->warn('Guárdala ahora: no se almacena en texto plano.');
+        }
 
         $profiles = [
             ['name' => 'Ana Torres', 'username' => 'ana.tech', 'email' => 'ana@devstagram.local'],
@@ -122,16 +130,15 @@ class DemoDataSeeder extends Seeder
             'Interesante proyecto, gracias por mostrar el proceso.',
         ];
 
-        $postsByUser = Post::whereIn('user_id', $users->pluck('id'))
+        $availablePosts = Post::whereIn('user_id', $users->pluck('id'))
             ->orderBy('id')
             ->get()
-            ->groupBy('user_id');
+            ->values();
 
         foreach ($users as $userIndex => $user) {
             foreach ($comments as $commentIndex => $comment) {
-                $targetUser = $users[($userIndex + $commentIndex + 1) % $users->count()];
-                $targetPosts = $postsByUser->get($targetUser->id);
-                $post = $targetPosts[$commentIndex % $targetPosts->count()];
+                $postIndex = ($userIndex * count($comments) + $commentIndex) % $availablePosts->count();
+                $post = $availablePosts[$postIndex];
 
                 Comentario::updateOrCreate([
                     'user_id' => $user->id,
