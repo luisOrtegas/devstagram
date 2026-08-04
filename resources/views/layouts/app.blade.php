@@ -74,7 +74,18 @@
                                         {{ $notificacionesSinLeer > 99 ? '99+' : $notificacionesSinLeer }}
                                     </span>
                                 @endif
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 shrink-0" aria-hidden="true">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    class="shrink-0"
+                                    width="16"
+                                    height="16"
+                                    style="width: 1rem; height: 1rem; min-width: 1rem; max-width: 1rem;"
+                                    aria-hidden="true"
+                                >
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
                             </summary>
@@ -104,7 +115,17 @@
                                                     {{ $notificacionesSinLeer > 99 ? '99+' : $notificacionesSinLeer }}
                                                 </span>
                                             @endif
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4" aria-hidden="true">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke-width="2"
+                                                stroke="currentColor"
+                                                width="16"
+                                                height="16"
+                                                style="width: 1rem; height: 1rem; min-width: 1rem; max-width: 1rem;"
+                                                aria-hidden="true"
+                                            >
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                             </svg>
                                         </span>
