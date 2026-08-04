@@ -42,7 +42,7 @@
                         @endunless
 
                         @if ($post->descripcion && !\Illuminate\Support\Str::startsWith($post->titulo, 'Galería Devstagram'))
-                            <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-gray-600">{{ $post->descripcion }}</p>
+                            <p class="mt-2 whitespace-pre-line break-words text-sm leading-6 text-gray-600">{!! \App\Support\MentionFormatter::toHtml($post->descripcion) !!}</p>
                         @endif
 
                         <div class="mt-auto flex items-center gap-5 border-t border-gray-100 pt-4 text-sm font-bold text-gray-600">
