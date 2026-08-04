@@ -13,6 +13,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,13 @@ Route::get('/bienvenida', WelcomeController::class)
     ->middleware('auth')
     ->name('welcome');
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/notificaciones/{notification}', [NotificationController::class, 'show'])
+        ->name('notifications.show');
+    Route::post('/notificaciones/leer-todas', [NotificationController::class, 'markAllAsRead'])
+        ->name('notifications.read-all');
+});
 
 Route::get('/buscar', [SearchController::class, 'index'])->name('users.search');
 
