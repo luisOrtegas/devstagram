@@ -16,20 +16,28 @@ class SearchController extends Controller
     {
         $request->validate([
             'q' => ['nullable', 'string', 'max:50'],
+            'letra' => ['nullable', 'string', 'size:1', 'regex:/^[a-zA-Z]$/'],
         ]);
 
         $query = trim((string) $request->query('q', ''));
+        $letra = strtoupper(trim((string) $request->query('letra', '')));
 
         $usuarios = null;
 
-        if ($query !== '') {
+        if ($query !== '' || $letra !== '') {
             $usuarios = User::query()
                 ->whereKeyNot(auth()->id())
-                ->where(function ($users) use ($query) {
-                    $users->where('username', 'like', "%{$query}%")
-                        ->orWhere('name', 'like', "%{$query}%");
+                ->when($query !== '', function ($builder) use ($query) {
+                    $builder->where(function ($users) use ($query) {
+                        $users->where('username', 'like', "%{$query}%")
+                            ->orWhere('name', 'like', "%{$query}%");
+                    });
+                })
+                ->when($letra !== '', function ($builder) use ($letra) {
+                    $builder->where('name', 'like', "{$letra}%");
                 })
                 ->withCount(['followers', 'posts'])
+                ->orderBy('name')
                 ->orderBy('username')
                 ->paginate(12)
                 ->withQueryString();
@@ -37,6 +45,7 @@ class SearchController extends Controller
 
         return view('users.search', [
             'query' => $query,
+            'letra' => $letra,
             'usuarios' => $usuarios,
         ]);
     }
