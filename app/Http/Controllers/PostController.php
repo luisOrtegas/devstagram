@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\MentionedInPostNotification;
 use App\Notifications\NewPostNotification;
+use App\Support\MentionFormatter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
@@ -35,7 +37,14 @@ class PostController extends Controller
 
     public function create() 
     {
-        return view('posts.create');
+        $usuarios = User::query()
+            ->whereKeyNot(auth()->id())
+            ->orderBy('name')
+            ->get(['name', 'username', 'imagen']);
+
+        return view('posts.create', [
+            'usuarios' => $usuarios,
+        ]);
     }
 
     public function store(Request $request)
@@ -71,7 +80,22 @@ class PostController extends Controller
              'user_id' => auth()->user()->id
         ]);
 
-        $followers = $request->user()->followers()->get();
+        $mentionedUsernames = MentionFormatter::usernames($post->descripcion);
+        $mentionedUsers = User::query()
+            ->whereIn('username', $mentionedUsernames)
+            ->whereKeyNot($request->user()->id)
+            ->get();
+
+        foreach ($mentionedUsers as $mentionedUser) {
+            $mentionedUser->notify(
+                new MentionedInPostNotification($post, $request->user())
+            );
+        }
+
+        $followers = $request->user()
+            ->followers()
+            ->whereNotIn('users.id', $mentionedUsers->pluck('id'))
+            ->get();
 
         if ($followers->isNotEmpty()) {
             Notification::send(
